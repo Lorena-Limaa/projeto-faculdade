@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import { View, Image, StyleSheet, useWindowDimensions, ScrollView } from "react-native";
+import { 
+    View, 
+    Image, 
+    StyleSheet, 
+    useWindowDimensions, 
+    ScrollView 
+} from "react-native";
 import Logo from '../../../assets/images/Logo_1.png';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
@@ -11,19 +17,19 @@ const SignInScreen = () => {
     const {height} = useWindowDimensions();
 
     const onSignInPressed = () => {
-        console.warn("Sign in");
+        console.warn('Sign in');
     };
 
     const onForgotPasswordPressed = () => {
-        console.warn("onForgotPasswordPressed");
+        console.warn('onForgotPasswordPressed');
     };
 
-    const onSignUpPressed = () => {
-        console.warn("Sign up");
+    const onSignUpPress = () => {
+        console.warn('onSignUpPress');
     };
 
     return (
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.root}>
                 <Image 
                     source={Logo} 
@@ -49,13 +55,13 @@ const SignInScreen = () => {
                 <CustomButton
                     text="Esqueceu a senha?" 
                     onPress={onForgotPasswordPressed} 
-                    type="SECONDARY" 
+                    type="TERTIARY" 
                 />
 
                 <CustomButton
-                    text="Não tem uma conta? Se inscreva" 
-                    onPress={onSignUpPressed} 
-                    type="SECONDARY" 
+                    text="Não tem uma conta? Inscreva-se" 
+                    onPress={onSignUpPress} 
+                    type="TERTIARY" 
                 />
             </View>
         </ScrollView>
@@ -67,6 +73,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 20,
     },
+    
     logo: {
         width: '70%',
         maxWidth: 300,
