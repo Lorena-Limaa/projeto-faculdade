@@ -9,23 +9,26 @@ import {
 import Logo from '../../../assets/images/Logo_1.png';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
+import { useNavigation } from '@react-navigation/native';
 
 const SignInScreen = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const {height} = useWindowDimensions();
+    const navigation = useNavigation();
 
     const onSignInPressed = () => {
-        console.warn('Sign in');
+        // Validate user
+        navigation.navigate("Home");
     };
 
     const onForgotPasswordPressed = () => {
-        console.warn('onForgotPasswordPressed');
+        navigation.navigate("ForgotPassword");
     };
 
     const onSignUpPress = () => {
-        console.warn('onSignUpPress');
+        navigation.navigate("SignUp");
     };
 
     return (

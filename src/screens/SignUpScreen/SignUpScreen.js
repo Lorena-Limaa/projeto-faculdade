@@ -3,18 +3,22 @@ import { View, StyleSheet, ScrollView, Text } from "react-native";
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
 
+import { useNavigation } from '@react-navigation/native';
+
 const SignUpScreen = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordRepeat, setPasswordRepeat] = useState('');
 
+    const navigation = useNavigation();
+
     const onRegisterPressed = () => {
-        console.warn('onRegisterPressed');
+        navigation.navigate("ConfirmEmail");
     };
 
     const onSignInPress = () => {
-        console.warn('onSignInPress');
+        navigation.navigate("SignIn");
     };
 
     const onTermsOfUsePressed = () => {
@@ -50,7 +54,7 @@ const SignUpScreen = () => {
                 />
 
                 <CustomInput 
-                    placeholder="Repita a senha" 
+                    placeholder="Digite novamente a senha" 
                     value={passwordRepeat} 
                     setValue={setPasswordRepeat} 
                     secureTextEntry
@@ -65,7 +69,7 @@ const SignUpScreen = () => {
                 </Text>
 
                 <CustomButton
-                    text="Tem uma conta? Entre" 
+                    text="Tem uma conta? Faça o login" 
                     onPress={onSignInPress} 
                     type="TERTIARY" 
                 />

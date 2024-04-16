@@ -5,13 +5,14 @@ import CustomButton from '../../components/CustomButton/CustomButton';
 
 import { useNavigation } from '@react-navigation/native';
 
-const ForgotPasswordScreen = () => {
-    const [username, setUsername] = useState('');
+const NewPasswordScreen = () => {
+    const [code, setCode] = useState('');
+    const [newPassword, setNewPassword] = useState('');
 
     const navigation = useNavigation();
 
-    const onSendPressed = () => {
-        navigation.navigate("NewPassword");
+    const onSubmitPressed = () => {
+        navigation.navigate("Home");
     };
 
     const onSignInPress = () => {
@@ -21,15 +22,21 @@ const ForgotPasswordScreen = () => {
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.root}>
-                <Text style={styles.title}>Redefina sua senha</Text>
+                <Text style={styles.title}>Nova senha</Text>
 
                 <CustomInput 
-                    placeholder="Nome do usuário" 
-                    value={username} 
-                    setValue={setUsername}  
+                    placeholder="Código" 
+                    value={code} 
+                    setValue={setCode}  
                 />
 
-                <CustomButton text="Envie" onPress={onSendPressed} />
+                <CustomInput 
+                    placeholder="Digite sua nova senha" 
+                    value={newPassword} 
+                    setValue={setNewPassword}  
+                />
+
+                <CustomButton text="Enviar" onPress={onSubmitPressed} />
 
                 <CustomButton
                     text="Voltar para fazer login" 
@@ -64,4 +71,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ForgotPasswordScreen;
+export default NewPasswordScreen;
