@@ -29,7 +29,7 @@ const ForgotPasswordScreen = () => {
                     setValue={setUsername}  
                 />
 
-                <CustomButton text="Envie" onPress={onSendPressed} />
+                <CustomButton text="Enviar" onPress={onSendPressed} />
 
                 <CustomButton
                     text="Voltar para fazer login" 

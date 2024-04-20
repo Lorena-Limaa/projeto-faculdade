@@ -1,34 +1,39 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { 
     View, 
     Image, 
     StyleSheet, 
     useWindowDimensions, 
-    ScrollView 
+    ScrollView
 } from "react-native";
 import Logo from '../../../assets/images/Logo_1.png';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import {useForm} from 'react-hook-form'; 
 
 const SignInScreen = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-
     const {height} = useWindowDimensions();
     const navigation = useNavigation();
 
-    const onSignInPressed = () => {
+    const {
+        control, 
+        handleSubmit, 
+        formState: {errors},
+    } = useForm();
+
+    const onSignInPressed = data => {
+        console.log(data);
         // Validate user
-        navigation.navigate("Home");
+        navigation.navigate('Home');
     };
 
     const onForgotPasswordPressed = () => {
-        navigation.navigate("ForgotPassword");
+        navigation.navigate('ForgotPassword');
     };
 
     const onSignUpPress = () => {
-        navigation.navigate("SignUp");
+        navigation.navigate('SignUp');
     };
 
     return (
@@ -41,19 +46,27 @@ const SignInScreen = () => {
                 />
 
                 <CustomInput 
-                    placeholder="Nome do usuário" 
-                    value={username} 
-                    setValue={setUsername}  
+                    name="username"
+                    placeholder="Nome do usuário"
+                    control={control}
+                    rules={{required: 'Por favor, preencha o campo nome do usuário'}}
                 />
 
                 <CustomInput 
+                    name="password"
                     placeholder="Senha" 
-                    value={password} 
-                    setValue={setPassword} 
                     secureTextEntry
+                    control={control}
+                    rules={{
+                        required: 'Por favor, preencha o campo senha', 
+                        minLength: {
+                            value: 3, 
+                            message: 'A senha deve ter no mínimo 3 caracteres',
+                        },
+                    }}
                 />
 
-                <CustomButton text="Entrar" onPress={onSignInPressed} />
+                <CustomButton text="Entrar" onPress={handleSubmit(onSignInPressed)} />
 
                 <CustomButton
                     text="Esqueceu a senha?" 

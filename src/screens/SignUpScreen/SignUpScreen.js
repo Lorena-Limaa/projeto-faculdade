@@ -1,24 +1,24 @@
-import React, {useState} from 'react';
-import { View, StyleSheet, ScrollView, Text } from "react-native";
+import React from 'react';
+import {View, StyleSheet, ScrollView, Text} from "react-native";
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
+import {useNavigation} from '@react-navigation/native';
+import {useForm} from 'react-hook-form';
 
-import { useNavigation } from '@react-navigation/native';
+const EMAIL_REGEX =
+  /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 const SignUpScreen = () => {
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [passwordRepeat, setPasswordRepeat] = useState('');
-
+    const {control, handleSubmit, watch} = useForm();
+    const pwd = watch('password');
     const navigation = useNavigation();
 
     const onRegisterPressed = () => {
-        navigation.navigate("ConfirmEmail");
+        navigation.navigate('ConfirmEmail');
     };
 
     const onSignInPress = () => {
-        navigation.navigate("SignIn");
+        navigation.navigate('SignIn');
     };
 
     const onTermsOfUsePressed = () => {
@@ -34,33 +34,58 @@ const SignUpScreen = () => {
             <View style={styles.root}>
                 <Text style={styles.title}>Crie uma conta</Text>
 
-                <CustomInput 
-                    placeholder="Nome do usuário" 
-                    value={username} 
-                    setValue={setUsername}  
+                <CustomInput
+                    name="username"
+                    control={control}
+                    placeholder="Nome do usuário"
+                    rules={{
+                        required: 'Por favor, preencha o campo nome do usuário',
+                        minLength: {
+                        value: 3,
+                        message: 'O campo deve ter no mínimo 3 caracteres',
+                        },
+                        maxLength: {
+                        value: 24,
+                        message: 'O campo deve ter no máximo 24 caracteres',
+                        },
+                    }}
                 />
 
                 <CustomInput 
-                    placeholder="E-mail" 
-                    value={email} 
-                    setValue={setEmail}  
+                    name="email"
+                    control={control}
+                    placeholder="E-mail"
+                    rules={{
+                        required: 'Por favor, preencha o campo E-mail',
+                        pattern: {value: EMAIL_REGEX, message: 'Email inválido'}
+                    }}
                 />
 
                 <CustomInput 
+                    name="password"
+                    control={control}
                     placeholder="Senha" 
-                    value={password} 
-                    setValue={setPassword} 
                     secureTextEntry
+                    rules={{
+                        required: 'Por favor, preencha o campo senha',
+                        minLength: {
+                        value: 8,
+                        message: 'O campo deve ter no mínimo 8 caracteres',
+                        },
+                    }}
                 />
 
                 <CustomInput 
-                    placeholder="Digite novamente a senha" 
-                    value={passwordRepeat} 
-                    setValue={setPasswordRepeat} 
+                    name="password-repeat"
+                    control={control}
+                    placeholder="Digite a senha novamente" 
                     secureTextEntry
+                    rules={{
+                        validate: value => value === pwd || 'Senha não confere',
+                    }}
                 />
 
-                <CustomButton text="Inscreva-se" onPress={onRegisterPressed} />
+                <CustomButton text="Inscreva-se" onPress={handleSubmit(onRegisterPressed)} />
 
                 <Text style={styles.text}>
                     Ao se registrar, você confirma que aceita nossos{' '} 
