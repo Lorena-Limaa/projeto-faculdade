@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { View, StyleSheet, ScrollView, Text } from "react-native";
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
 
+import { useForm } from 'react-hook-form';
+
 import { useNavigation } from '@react-navigation/native';
 
 const ForgotPasswordScreen = () => {
-    const [username, setUsername] = useState('');
+    const { control, handleSubmit } = useForm();
 
     const navigation = useNavigation();
 
@@ -22,14 +24,14 @@ const ForgotPasswordScreen = () => {
         <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.root}>
                 <Text style={styles.title}>Redefina sua senha</Text>
-
-                <CustomInput 
+                <CustomInput // Alterado para funcionamento do 'control', que crashava o app
+                    control={control}
+                    name="username"
+                    rules={{ required: 'Campo obrigatório' }}
                     placeholder="Nome do usuário" 
-                    value={username} 
-                    setValue={setUsername}  
                 />
 
-                <CustomButton text="Enviar" onPress={onSendPressed} />
+                <CustomButton text="Enviar" onPress={handleSubmit(onSendPressed)} />
 
                 <CustomButton
                     text="Voltar para fazer login" 

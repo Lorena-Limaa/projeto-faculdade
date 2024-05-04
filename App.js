@@ -1,6 +1,8 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context'; //Alterado o SafeAreaView do 'react' para o a biblioteca Safe-Area-Context, para correção em Android
 import Navigation from './src/navigation';
+
 
 const App = () => {
   return (
