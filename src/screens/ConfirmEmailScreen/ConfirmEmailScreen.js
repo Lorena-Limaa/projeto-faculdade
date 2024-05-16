@@ -1,12 +1,18 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { View, StyleSheet, ScrollView, Text } from "react-native";
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
-
 import { useNavigation } from '@react-navigation/native';
+import { useForm } from 'react-hook-form';
+import { useRoute } from '@react-navigation/native';
 
 const ConfirmEmailScreen = () => {
-    const [code, setCode] = useState('');
+    const route = useRoute();
+    const {control, handleSubmit, watch} = useForm({
+        defaultValues: {username: route?.params?.username},
+    });
+
+    const username = watch('username');
 
     const navigation = useNavigation();
 
@@ -27,13 +33,25 @@ const ConfirmEmailScreen = () => {
             <View style={styles.root}>
                 <Text style={styles.title}>Confirme seu e-mail</Text>
 
-                <CustomInput 
-                    placeholder="Digite seu código de confirmação" 
-                    value={code} 
-                    setValue={setCode}  
+                <CustomInput
+                    name="username"
+                    control={control}
+                    placeholder="Nome do usuário"
+                    rules={{
+                        required: 'Por favor, preencha o campo nome do usuário',
+                    }}
                 />
 
-                <CustomButton text="Confirmar" onPress={onConfirmPressed} />
+                <CustomInput 
+                    name="code"
+                    control={control}
+                    placeholder="Digite seu código de confirmação"
+                    rules={{
+                        required: 'Por favor, preencha o campo código de confirmação',
+                    }}
+                />
+
+                <CustomButton text="Confirmar" onPress={handleSubmit(onConfirmPressed)} />
 
                 <CustomButton
                     text="Reenviar código" 

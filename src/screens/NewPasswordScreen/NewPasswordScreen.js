@@ -1,13 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { View, StyleSheet, ScrollView, Text } from "react-native";
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
-
 import { useNavigation } from '@react-navigation/native';
+import {useForm} from 'react-hook-form';
 
 const NewPasswordScreen = () => {
-    const [code, setCode] = useState('');
-    const [newPassword, setNewPassword] = useState('');
+    const {control, handleSubmit} = useForm();
 
     const navigation = useNavigation();
 
@@ -22,21 +21,37 @@ const NewPasswordScreen = () => {
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.root}>
-                <Text style={styles.title}>Nova senha</Text>
+                <Text style={styles.title}>Resete sua senha</Text>
+
+                <CustomInput
+                    placeholder="Nome do usuário"
+                    name="username"
+                    control={control}
+                    rules={{required: 'Por favor, preencha o campo nome do usuário'}}
+                />
 
                 <CustomInput 
                     placeholder="Código" 
-                    value={code} 
-                    setValue={setCode}  
+                    name="code"
+                    control={control}
+                    rules={{required: 'Por favor, preencha o campo código'}}
                 />
 
                 <CustomInput 
                     placeholder="Digite sua nova senha" 
-                    value={newPassword} 
-                    setValue={setNewPassword}  
+                    name="password"
+                    control={control}
+                    secureTextEntry
+                    rules={{
+                        required: 'Por favor, preencha o campo nova senha',
+                        minLength: {
+                        value: 8,
+                        message: 'A senha deve ter no mínimo 8 caracteres',
+                        },
+                    }}  
                 />
 
-                <CustomButton text="Enviar" onPress={onSubmitPressed} />
+                <CustomButton text="Enviar" onPress={handleSubmit(onSubmitPressed)} />
 
                 <CustomButton
                     text="Voltar para fazer login" 

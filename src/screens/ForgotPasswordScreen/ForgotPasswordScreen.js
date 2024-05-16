@@ -2,14 +2,11 @@ import React from 'react';
 import { View, StyleSheet, ScrollView, Text } from "react-native";
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
-
-import { useForm } from 'react-hook-form';
-
 import { useNavigation } from '@react-navigation/native';
+import { useForm } from 'react-hook-form';
 
 const ForgotPasswordScreen = () => {
     const { control, handleSubmit } = useForm();
-
     const navigation = useNavigation();
 
     const onSendPressed = () => {
@@ -24,11 +21,12 @@ const ForgotPasswordScreen = () => {
         <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.root}>
                 <Text style={styles.title}>Redefina sua senha</Text>
-                <CustomInput // Alterado para funcionamento do 'control', que crashava o app
-                    control={control}
+
+                <CustomInput                    
                     name="username"
-                    rules={{ required: 'Campo obrigatório' }}
+                    control={control}
                     placeholder="Nome do usuário" 
+                    rules={{ required: 'Campo obrigatório' }}                    
                 />
 
                 <CustomButton text="Enviar" onPress={handleSubmit(onSendPressed)} />
@@ -47,6 +45,7 @@ const styles = StyleSheet.create({
     root: {
         alignItems: 'center',
         padding: 20,
+        marginTop: 80
     },
 
     title: {
