@@ -9,10 +9,10 @@ Este aplicativo está em desenvolvimento, associado à disciplina de Programaç�
 ## Front end
 
 - React Native
-- React Hook Form
-- React Navigation
+  - React Hook Form
+  - React Navigation
+  - Docx
 - Expo
-- Docx 
 
 # Autores
 
