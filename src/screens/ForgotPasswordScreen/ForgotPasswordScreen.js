@@ -47,19 +47,16 @@ const styles = StyleSheet.create({
         padding: 20,
         marginTop: 80
     },
-
     title: {
         fontSize: 24,
         fontWeight: 'bold',
         color: '#051C60',
         margin: 10,
     },
-
     text: {
         color: 'gray',
         marginVertical: 10,
     },
-    
     link: {
         color: '#FE2D2E',
     }

@@ -8,11 +8,9 @@ import { useRoute } from '@react-navigation/native';
 
 const ConfirmEmailScreen = () => {
     const route = useRoute();
-    const {control, handleSubmit, watch} = useForm({
-        defaultValues: {username: route?.params?.username},
+    const { control, handleSubmit } = useForm({
+        defaultValues: { username: route?.params?.username },
     });
-
-    const username = watch('username');
 
     const navigation = useNavigation();
 
@@ -74,19 +72,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 20,
     },
-
     title: {
         fontSize: 24,
         fontWeight: 'bold',
         color: '#051C60',
         margin: 10,
     },
-
     text: {
         color: 'gray',
         marginVertical: 10,
     },
-    
     link: {
         color: '#FE2D2E',
     }

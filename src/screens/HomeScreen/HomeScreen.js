@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, Button, View, TextInput, ScrollView } from 'react-native';
-
 import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
-import { Document, Packer, Paragraph, HeadingLevel, BorderStyle } from 'docx';
+import { Document, Packer, Paragraph, HeadingLevel } from 'docx';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CheckBox from 'expo-checkbox';
 
