@@ -13,8 +13,42 @@ const SignUpScreen = () => {
     const pwd = watch('password');
     const navigation = useNavigation();
 
-    const onRegisterPressed = () => {
-        navigation.navigate('ConfirmEmail');
+    const onRegisterPressed = async (data) => {
+        setError('');
+        const encryptedPassword = CryptoJS.MD5(data.password).toString();
+
+
+        fetch('https://grupoportugalgerencial.myscriptcase.com/scriptcase9/app/GrupoPortugal/conexao_signup', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: data.username,
+                password: data.password,
+                email: data.email,               
+            })
+        })
+        .then((response) => response.json())
+        .then((res) => {
+            console.log('Resposta da API:', res);
+            if (res.success) {
+                AsyncStorage.setItem('user', JSON.stringify(res.user));
+                navigation.dispatch(
+                    CommonActions.reset({
+                        index: 0,
+                        routes: [{ name: 'Home', params: { user: res.user } }],
+                    })
+                );
+            } else {
+                setError(res.message);
+            }
+        })
+        .catch((error) => {
+            console.error('Erro ao conectar com o servidor:', error);
+            setError('Erro ao conectar com o servidor');
+        });
     };
 
     const onSignInPress = () => {
