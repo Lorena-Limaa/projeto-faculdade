@@ -1,20 +1,12 @@
 import React, { useState } from 'react';
-import { 
-    View,
-    Text,
-    Image,
-    StyleSheet, 
-    useWindowDimensions, 
-    ScrollView
-} from "react-native";
-import Logo from '../../../assets/images/Logo_1.png';
-import CustomInput from '../../components/CustomInput';
-import CustomButton from '../../components/CustomButton/CustomButton';
+import { View, Text, Image, StyleSheet, ScrollView, useWindowDimensions } from "react-native";
 import { useNavigation, CommonActions } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CryptoJS from 'crypto-js';
-
+import Logo from '../../../assets/images/Logo_1.png';
+import CustomInput from '../../components/CustomInput';
+import CustomButton from '../../components/CustomButton/CustomButton';
 
 const SignInScreen = () => {
     const { height } = useWindowDimensions();
@@ -25,7 +17,6 @@ const SignInScreen = () => {
     const onSignInPressed = (data) => {
         setError('');
         const encryptedPassword = CryptoJS.MD5(data.password).toString();
-
 
         fetch('https://grupoportugalgerencial.myscriptcase.com/scriptcase9/app/GrupoPortugal/conexao_user/index.php', {
             method: 'POST',
@@ -57,10 +48,6 @@ const SignInScreen = () => {
             console.error('Erro ao conectar com o servidor:', error);
             setError('Erro ao conectar com o servidor');
         });
-    };
-
-    const onForgotPasswordPressed = () => {
-        navigation.navigate('ForgotPassword');
     };
 
     const onSignUpPress = () => {
@@ -100,12 +87,6 @@ const SignInScreen = () => {
                 {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
                 <CustomButton text="Entrar" onPress={handleSubmit(onSignInPressed)} />
-
-                <CustomButton
-                    text="Esqueceu a senha?" 
-                    onPress={onForgotPasswordPressed} 
-                    type="TERTIARY" 
-                />
 
                 <CustomButton
                     text="Não tem uma conta? Inscreva-se" 

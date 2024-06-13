@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, TextInput, View} from "react-native";
+import {StyleSheet, TextInput, View, Text} from "react-native";
 import {Controller} from 'react-hook-form';
 
 const CustomInput = ({
@@ -16,11 +16,10 @@ const CustomInput = ({
             rules={rules}
             render={({field: {value, onChange, onBlur}, fieldState: {error}}) => (
                 <>
-                    <View
-                        style={[
-                            styles.container, 
-                            {borderColor: error ? 'red' : '#e8e8e8'},
-                        ]}>
+                    <View style={[
+                        styles.container, 
+                        {borderColor: error ? 'red' : '#e8e8e8'},
+                    ]}>
                         <TextInput
                             value={value} 
                             onChangeText={onChange} 
@@ -43,15 +42,12 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
         width: '100%',
-
         borderColor: '#e8e8e8',
         borderWidth: 1,
         borderRadius: 5,
-
         paddingHorizontal: 10,
         marginVertical: 5,
     },
-    
     input: {
         padding: 15
     },

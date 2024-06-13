@@ -1,12 +1,12 @@
 import React from 'react';
-import {View, StyleSheet, ScrollView, Text} from "react-native";
+import { View, StyleSheet, ScrollView, Text } from "react-native";
+import { useNavigation, CommonActions } from '@react-navigation/native';
+import { useForm } from 'react-hook-form';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
-import {useNavigation} from '@react-navigation/native';
-import {useForm} from 'react-hook-form';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const EMAIL_REGEX =
-  /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 const SignUpScreen = () => {
     const {control, handleSubmit, watch} = useForm();
@@ -16,7 +16,6 @@ const SignUpScreen = () => {
     const onRegisterPressed = async (data) => {
         setError('');
         const encryptedPassword = CryptoJS.MD5(data.password).toString();
-
 
         fetch('https://grupoportugalgerencial.myscriptcase.com/scriptcase9/app/GrupoPortugal/conexao_signup', {
             method: 'POST',

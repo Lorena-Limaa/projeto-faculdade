@@ -4,7 +4,7 @@
     "slug": "ProjetoFaculdade",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/Logo_1.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
