@@ -11,6 +11,7 @@ Este aplicativo está em desenvolvimento, associado à disciplina de Programaç�
 - React Native
   - React Hook Form
   - React Navigation
+  - AsyncStorage
   - Docx
 - Expo
 
