@@ -18,10 +18,6 @@ Este aplicativo está em desenvolvimento, associado à disciplina de Programaç�
 
 Lorena Lima e Vitor Conceição
 
-## Imagens
-
-![06](https://github.com/Lorena-Limaa/projeto-faculdade/assets/86662381/f3dd2c59-1103-48fd-9d51-05c034dfc6a5)
-
 
 
 

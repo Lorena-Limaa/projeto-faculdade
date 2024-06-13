@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, Button, View, TextInput, ScrollView } from 'react-native';
 import * as FileSystem from 'expo-file-system';
@@ -6,8 +6,15 @@ import * as Sharing from 'expo-sharing';
 import { Document, Packer, Paragraph, HeadingLevel } from 'docx';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CheckBox from 'expo-checkbox';
+import { useNavigation } from '@react-navigation/native';
 
-export default function App() {
+const HomeScreen = () => {
+  const navigation = useNavigation();
+
+  const handleSair = () => {
+    navigation.navigate('SignIn'); 
+  };
+
   const [formValue, setFormValue] = useState({
     professor: '',
     turma: '',
@@ -271,6 +278,7 @@ return (
     />
 
     <Button title="Generate Word Document" onPress={generateWordDocument} />
+    <Button title="Sair" onPress={handleSair} style={{ backgroundColor: 'lightgrey' }} />
     <StatusBar style="auto" />
   </SafeAreaView>
   </ScrollView>
@@ -336,3 +344,5 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 });
+
+export default HomeScreen;

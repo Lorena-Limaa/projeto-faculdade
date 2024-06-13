@@ -26,7 +26,7 @@ const SignInScreen = () => {
             },
             body: JSON.stringify({
                 username: data.username,
-                password: data.password,                
+                password: encryptedPassword,                
             })
         })
         .then((response) => response.json())
@@ -41,7 +41,7 @@ const SignInScreen = () => {
                     })
                 );
             } else {
-                setError(res.message);
+                setError('E-mail ou senha inválidos');
             }
         })
         .catch((error) => {
@@ -78,8 +78,8 @@ const SignInScreen = () => {
                     rules={{
                         required: 'Por favor, preencha o campo senha', 
                         minLength: {
-                            value: 3, 
-                            message: 'A senha deve ter no mínimo 3 caracteres',
+                            value: 8, 
+                            message: 'A senha deve ter no mínimo 8 caracteres',
                         },
                     }}
                 />
