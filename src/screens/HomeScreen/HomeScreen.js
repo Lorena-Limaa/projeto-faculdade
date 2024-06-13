@@ -63,6 +63,8 @@ const formatDate = (text) => {
     habilidades,
     objetivos,
     estrategias,
+    foiPossivelAluno: [],
+    procedimentosProfessor: [],
     observacoes,
     relatorio,
     dataProfessor,
@@ -83,17 +85,26 @@ const formatDate = (text) => {
           }
         },
         children: [
-          new Paragraph({ text: "Informações Iniciais", heading: HeadingLevel.TITLE }),
-          new Paragraph({ text: `Professor(a): ${professor}`, heading: HeadingLevel.HEADING_1 }),
-          new Paragraph({ text: `Turma: ${turma}`, heading: HeadingLevel.HEADING_1 }),
-          new Paragraph({ text: `Aluno(a): ${aluno}`, heading: HeadingLevel.HEADING_1 }),
-          new Paragraph({ text: `Período Letivo: ${periodoLetivo}`, heading: HeadingLevel.HEADING_1 }),
-          new Paragraph({ text: `Disciplinas: ${disciplinas}`, heading: HeadingLevel.HEADING_1 }),
-          new Paragraph({ text: `Matérias: ${materias}`, heading: HeadingLevel.HEADING_1 }),
-          new Paragraph({ text: `Habilidades: ${habilidades}`, heading: HeadingLevel.HEADING_1 }),
-          new Paragraph({ text: `Objetivos: ${objetivos}`, heading: HeadingLevel.HEADING_1 }),
-          new Paragraph({ text: `Estratégias: ${estrategias}`, heading: HeadingLevel.HEADING_1 }),
-        ]
+              new Paragraph({ text: "Informações Iniciais", heading: HeadingLevel.TITLE, bold: true }),
+              new Paragraph({ text: "Professor(a): ", bold: true }),
+              new Paragraph({ text: professor, heading: HeadingLevel.HEADING_1 }),
+              new Paragraph({ text: "Turma: ", bold: true }),
+              new Paragraph({ text: turma, heading: HeadingLevel.HEADING_1 }),
+              new Paragraph({ text: "Aluno(a): ", bold: true }),
+              new Paragraph({ text: aluno, heading: HeadingLevel.HEADING_1 }),
+              new Paragraph({ text: "Período Letivo: ", bold: true }),
+              new Paragraph({ text: periodoLetivo, heading: HeadingLevel.HEADING_1 }),
+              new Paragraph({ text: "Disciplinas: ", bold: true }),
+              new Paragraph({ text: disciplinas, heading: HeadingLevel.HEADING_1 }),
+              new Paragraph({ text: "Matérias: ", bold: true }),
+              new Paragraph({ text: materias, heading: HeadingLevel.HEADING_1 }),
+              new Paragraph({ text: "Habilidades: ", bold: true }),
+              new Paragraph({ text: habilidades, heading: HeadingLevel.HEADING_1 }),
+              new Paragraph({ text: "Objetivos: ", bold: true }),
+              new Paragraph({ text: objetivos, heading: HeadingLevel.HEADING_1 }),
+              new Paragraph({ text: "Estratégias: ", bold: true }), 
+              new Paragraph({ text: estrategias, heading: HeadingLevel.HEADING_1 }),
+]
       },
       {
         properties: {
@@ -107,11 +118,14 @@ const formatDate = (text) => {
           }
         },
         children: [
-          new Paragraph({ text: "Desenvolvimento das Aulas", heading: HeadingLevel.TITLE }),
-          new Paragraph({ text: `Foi possível o(a) aluno(a): ${foiPossivelAluno.join(', ')}`, heading: HeadingLevel.HEADING_1 }),
-          new Paragraph({ text: `Procedimentos do(a) professor(a): ${procedimentosProfessor.join(', ')}`, heading: HeadingLevel.HEADING_1 }),
-          new Paragraph({ text: `Observações: ${observacoes}`, heading: HeadingLevel.HEADING_1 }),
-        ]
+            new Paragraph({ text: "Desenvolvimento das Aulas", heading: HeadingLevel.TITLE, bold: true }),
+            new Paragraph({ text: "Foi possível o(a) aluno(a): ", bold: true }),
+            new Paragraph({ text: foiPossivelAluno.join(', '), heading: HeadingLevel.HEADING_1 }),
+            new Paragraph({ text: "Procedimentos do(a) professor(a): ", bold: true }),
+            new Paragraph({ text: procedimentosProfessor.join(', '), heading: HeadingLevel.HEADING_1 }),
+            new Paragraph({ text: "Observações: ", bold: true }),
+            new Paragraph({ text: observacoes, heading: HeadingLevel.HEADING_1 }),
+]
       },
       {
         properties: {
@@ -125,14 +139,20 @@ const formatDate = (text) => {
           }
         },
         children: [
-          new Paragraph({ text: "Relatório do Bimestre", heading: HeadingLevel.TITLE }),
-          new Paragraph({ text: `Relatório: ${relatorio}`, heading: HeadingLevel.HEADING_1 }),
-          new Paragraph({ text: `Data: ${dataProfessor}`, heading: HeadingLevel.HEADING_1 }),
-          new Paragraph({ text: `Assinatura do(a) Professor(a):`, heading: HeadingLevel.HEADING_1 }),
-          new Paragraph({ text: `Orientadora Educacional: Rosangela`, heading: HeadingLevel.HEADING_1 }),
-          new Paragraph({ text: `Data:`, heading: HeadingLevel.HEADING_1 }),
-          new Paragraph({ text: `Assinatura do Responsável:`, heading: HeadingLevel.HEADING_1 }),
-        ]
+            new Paragraph({ text: "Relatório do Bimestre", heading: HeadingLevel.TITLE, bold: true }),
+            new Paragraph({ text: "Relatório: ", bold: true }),
+            new Paragraph({ text: relatorio, heading: HeadingLevel.HEADING_1 }),
+            new Paragraph({ text: "Data: ", bold: true }),
+            new Paragraph({ text: dataProfessor, heading: HeadingLevel.HEADING_1 }),
+            new Paragraph({ text: "Assinatura do(a) Professor(a):", bold: true }),
+            new Paragraph({ text: "   ", heading: HeadingLevel.HEADING_1 }),
+            new Paragraph({ text: "Orientadora Educacional: Rosangela", heading: HeadingLevel.HEADING_1 }),
+            new Paragraph({ text: "   ", bold: true }),
+            new Paragraph({ text: "Data:", bold: true }),
+            new Paragraph({ text: "   ", heading: HeadingLevel.HEADING_1 }),
+            new Paragraph({ text: "Assinatura do Responsável:", bold: true }),
+            new Paragraph({ text: "  ", heading: HeadingLevel.HEADING_1 }),
+]
       },
     ]
   });
@@ -182,7 +202,18 @@ return (
       value={formValue.periodoLetivo}
       placeholder="Período Letivo"
     />
-
+    <TextInput
+      style={styles.input}
+      onChangeText={(text) => setFormValue({...formValue, disciplinas: text})}
+      value={formValue.disciplinas}
+      placeholder="Disciplinas"
+    />
+    <TextInput
+      style={styles.input}
+      onChangeText={(text) => setFormValue({...formValue, materias: text})}
+      value={formValue.materias}
+      placeholder="Matérias"
+    />
     <TextInput
       style={styles.input}
       onChangeText={(text) => setFormValue({...formValue, habilidades: text})}
