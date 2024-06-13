@@ -8,6 +8,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import CheckBox from 'expo-checkbox';
 import { useNavigation } from '@react-navigation/native';
 
+
 const HomeScreen = () => {
   const navigation = useNavigation();
 
@@ -37,6 +38,20 @@ const HomeScreen = () => {
 
   const { foiPossivelAluno, procedimentosProfessor } = formValue;
 
+  const [formattedDate, setFormattedDate] = useState('');
+
+const formatDate = (text) => {
+  let formattedText = text.replace(/\D/g, '');
+  if (formattedText.length > 2) {
+    formattedText = `${formattedText.slice(0, 2)}/${formattedText.slice(2)}`;
+  }
+  if (formattedText.length > 5) {
+    formattedText = `${formattedText.slice(0, 5)}/${formattedText.slice(5, 9)}`;
+  }
+  setFormattedDate(formattedText);
+  setFormValue({ ...formValue, dataProfessor: formattedText });
+};
+
   const generateWordDocument = () => {
   const {
     professor,
@@ -51,10 +66,6 @@ const HomeScreen = () => {
     observacoes,
     relatorio,
     dataProfessor,
-    orientadoraEducacional,
-    assinaturaProfessor,
-    dataResponsavel,
-    assinaturaResponsavel
   } = formValue;
 
 
@@ -72,7 +83,7 @@ const HomeScreen = () => {
           }
         },
         children: [
-          new Paragraph({ text: "Primeira Página", heading: HeadingLevel.TITLE }),
+          new Paragraph({ text: "Informações Iniciais", heading: HeadingLevel.TITLE }),
           new Paragraph({ text: `Professor(a): ${professor}`, heading: HeadingLevel.HEADING_1 }),
           new Paragraph({ text: `Turma: ${turma}`, heading: HeadingLevel.HEADING_1 }),
           new Paragraph({ text: `Aluno(a): ${aluno}`, heading: HeadingLevel.HEADING_1 }),
@@ -96,7 +107,7 @@ const HomeScreen = () => {
           }
         },
         children: [
-          new Paragraph({ text: "Segunda Página", heading: HeadingLevel.TITLE }),
+          new Paragraph({ text: "Desenvolvimento das Aulas", heading: HeadingLevel.TITLE }),
           new Paragraph({ text: `Foi possível o(a) aluno(a): ${foiPossivelAluno.join(', ')}`, heading: HeadingLevel.HEADING_1 }),
           new Paragraph({ text: `Procedimentos do(a) professor(a): ${procedimentosProfessor.join(', ')}`, heading: HeadingLevel.HEADING_1 }),
           new Paragraph({ text: `Observações: ${observacoes}`, heading: HeadingLevel.HEADING_1 }),
@@ -114,13 +125,13 @@ const HomeScreen = () => {
           }
         },
         children: [
-          new Paragraph({ text: "Terceira Página", heading: HeadingLevel.TITLE }),
+          new Paragraph({ text: "Relatório do Bimestre", heading: HeadingLevel.TITLE }),
           new Paragraph({ text: `Relatório: ${relatorio}`, heading: HeadingLevel.HEADING_1 }),
           new Paragraph({ text: `Data: ${dataProfessor}`, heading: HeadingLevel.HEADING_1 }),
-          new Paragraph({ text: `Assinatura do(a) Professor(a): ${assinaturaProfessor}`, heading: HeadingLevel.HEADING_1 }),
-          new Paragraph({ text: `Orientadora Educacional: ${orientadoraEducacional}`, heading: HeadingLevel.HEADING_1 }),
-          new Paragraph({ text: `Data: ${dataResponsavel}`, heading: HeadingLevel.HEADING_1 }),
-          new Paragraph({ text: `Assinatura do Responsável: ${assinaturaResponsavel}`, heading: HeadingLevel.HEADING_1 }),
+          new Paragraph({ text: `Assinatura do(a) Professor(a):`, heading: HeadingLevel.HEADING_1 }),
+          new Paragraph({ text: `Orientadora Educacional: Rosangela`, heading: HeadingLevel.HEADING_1 }),
+          new Paragraph({ text: `Data:`, heading: HeadingLevel.HEADING_1 }),
+          new Paragraph({ text: `Assinatura do Responsável:`, heading: HeadingLevel.HEADING_1 }),
         ]
       },
     ]
@@ -171,7 +182,7 @@ return (
       value={formValue.periodoLetivo}
       placeholder="Período Letivo"
     />
-    {/* Campos de seleção para Disciplinas e Matérias */}
+
     <TextInput
       style={styles.input}
       onChangeText={(text) => setFormValue({...formValue, habilidades: text})}
@@ -246,36 +257,13 @@ return (
       placeholder="Relatório"
     />
     <TextInput
-      style={styles.input}
-      onChangeText={(text) => setFormValue({...formValue, data: text})}
-      value={formValue.data}
-      placeholder="Data"
-    />
-    <TextInput
-      style={styles.input}
-      onChangeText={(text) => setFormValue({...formValue, assinaturaProfessor: text})}
-      value={formValue.assinaturaProfessor}
-      placeholder="Assinatura do(a) Professor(a)"
-    />
-    {/* Incluir Orientadora Educacional (definido pelo desenvolvedor) */}
-    <TextInput
-      style={styles.input}
-      onChangeText={(text) => setFormValue({...formValue, dataResponsavel: text})}
-      value={formValue.dataResponsavel}
-      placeholder="Data"
-    />
-    <TextInput
-      style={styles.input}
-      onChangeText={(text) => setFormValue({...formValue, assinaturaResponsavel1: text})}
-      value={formValue.assinaturaResponsavel1}
-      placeholder="Assinatura do Responsável"
-    />
-    <TextInput
-      style={styles.input}
-      onChangeText={(text) => setFormValue({...formValue, assinaturaResponsavel2: text})}
-      value={formValue.assinaturaResponsavel2}
-      placeholder="Assinatura do Responsável"
-    />
+        style={styles.input}
+        onChangeText={(text) => formatDate(text)}
+        value={formValue.dataProfessor} // Usando formValue.dataProfessor
+        placeholder="Data"
+        maxLength={10}
+        keyboardType="numeric"
+      />
 
     <Button title="Generate Word Document" onPress={generateWordDocument} />
     <Button title="Sair" onPress={handleSair} style={{ backgroundColor: 'lightgrey' }} />
