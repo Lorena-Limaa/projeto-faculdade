@@ -41,7 +41,7 @@ const SignInScreen = () => {
                     })
                 );
             } else {
-                setError('E-mail ou senha inválidos');
+                setError('Usuário ou senha inválidos');
             }
         })
         .catch((error) => {

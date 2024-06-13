@@ -11,7 +11,7 @@ const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA
 const SignUpScreen = () => {
   const { control, handleSubmit, watch, reset, setError } = useForm();
   const [message, setMessage] = useState('');
-  const [messageType, setMessageType] = useState(''); // 'success' or 'error'
+  const [messageType, setMessageType] = useState('');
   const pwd = watch('password');
   const navigation = useNavigation();
 
